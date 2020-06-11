@@ -1,16 +1,8 @@
 import simplejson
 import boto3
 import pytest
-import os
 from moto import mock_dynamodb2
 from visitor_count import app
-
-
-"""Mocked AWS Credentials for moto."""
-os.environ['AWS_ACCESS_KEY_ID'] = 'testing'
-os.environ['AWS_SECRET_ACCESS_KEY'] = 'testing'
-os.environ['AWS_SECURITY_TOKEN'] = 'testing'
-os.environ['AWS_SESSION_TOKEN'] = 'testing'
 
 @pytest.fixture()
 def apigw_event():
