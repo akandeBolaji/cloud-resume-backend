@@ -1,0 +1,6 @@
+boto3
+simplejson
+moto
+pytest
+pytest-mock
+aws-sam-cli

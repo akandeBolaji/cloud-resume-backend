@@ -85,8 +85,8 @@ def test_lambda_handler(apigw_event, mocker):
     # yield table
 
     ret = app.lambda_handler(apigw_event, "")
-    data = simplejson.loads(ret["body"])
+    # data = simplejson.loads(ret["body"])
 
     assert ret["statusCode"] == 200
     assert "page" in ret["body"]
-    assert "visicount" in ret["body"]
+    assert "visitcount" in ret["body"]
