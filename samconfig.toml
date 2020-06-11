@@ -2,5 +2,5 @@ version=0.1
  [default.deploy.parameters]
  region = "us-east-1"
  stack_name = "resume-backend-stack"
- capabilites = "CAPABILITY_IAM"
+ capabilities = "CAPABILITY_IAM"
  s3_bucket = "bolajiakande.com"
