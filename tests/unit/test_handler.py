@@ -89,4 +89,4 @@ def test_lambda_handler(apigw_event, mocker):
 
     assert ret["statusCode"] == 200
     assert "page" in ret["body"]
-    assert "visitount" in ret["body"]
+    assert "visitcount" in ret["body"]
