@@ -1,0 +1,59 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  cloud-resume-challenge
+
+  Sample SAM Template for cloud-resume-challenge
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  GetVisitorCountFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: visitor_count/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: statistics
+      Environment:
+        Variables:
+          TABLE_NAME: statistics
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /visitor
+            Method: get
+  VisitorCountTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: statistics
+      AttributeDefinitions:
+        - AttributeName: page
+          AttributeType: S
+      KeySchema:
+        - AttributeName: page
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+      ProvisionedThroughput:
+        - ReadCapacityUnits: 5,
+          WriteCapacityUnits: 5,
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  GetVisitorCountApi:
+    Description: "API Gateway endpoint URL for Prod stage for Visitor Count function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/visitor/"
+  GetVisitorCountFunction:
+    Description: "Visitor Count Lambda Function ARN"
+    Value: !GetAtt GetVisitorCountFunction.Arn
+  GetVisitorFunctionIamRole:
+    Description: "Implicit IAM Role created for Visitor Count function"
+    Value: !GetAtt GetVisitorCountFunctionRole.Arn
