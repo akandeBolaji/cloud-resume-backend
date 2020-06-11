@@ -40,9 +40,6 @@ Resources:
         - AttributeName: page
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
-      ProvisionedThroughput:
-        - ReadCapacityUnits: 5,
-          WriteCapacityUnits: 5,
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
