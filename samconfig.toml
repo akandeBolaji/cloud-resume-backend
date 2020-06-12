@@ -3,4 +3,4 @@ version=0.1
  region = "us-east-2"
  stack_name = "resume-backend-stack"
  capabilities = "CAPABILITY_IAM"
- s3_bucket = "bolajiakande.com"
+ s3_bucket = "backend.bolajiakande.com"
